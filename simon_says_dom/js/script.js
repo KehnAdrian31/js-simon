@@ -2,7 +2,7 @@
 const numbersList = document.getElementById('numbers-list');
 const form = document.getElementById('answers-form');
 const inputs = document.querySelectorAll('input');
-const countdown = document.getElementById('countdown');
+const countdownElement = document.getElementById('countdown');
 const message = document.getElementById('message');
 const instructions = document.getElementById('instructions');
 const button = document.querySelector('button');
@@ -29,8 +29,34 @@ const generateRandomNumbers = (min, max) => {
 //genero i numeri random
 const numbers = generateRandomNumbers(1,10);
 
+
+//definisco la variabile che mi contiene i secondi
+let time = 10;
 //devo mostrare i numeri a video
 //ciclo l' array numbers
 for(let i=0; i<numbers.length; i++){
   numbersList.innerHTML += `<li class="list-item">${numbers[i]}</li>`;
 }
+
+//mostro il valore time dentro l' elemento countdown
+countdownElement.innerText = time;
+
+//definisco il setInterval che mi scale i secondi e mi nasconde i numeri per farmi apparire la form
+const countdown = setInterval(() =>{
+  //vado a decremenare il valore di time per mostrarlo sempre a video
+  time--;
+  countdownElement.innerText = time;
+
+  //mostro i campi output quandi time scende a 0, nascondo i numeri e cancellare l' intervallo
+  if(time === 0){
+    //cancello l'intervallo ( fa si che time non scenda sotto lo zero)
+    clearInterval(countdown);
+    //rimuovo la classe d-none a form
+    form.classList.remove('d-none');
+    //aggiungo la classe d-none a numbers-list
+    numbersList.classList.add('d-none');
+    instructions.innerText = `Digita i numeri che ricordi e visualizza il risultato`;
+
+
+  }
+}, 1000)
