@@ -59,4 +59,36 @@ const countdown = setInterval(() =>{
 
 
   }
-}, 1000)
+}, 1000);
+
+//definisco la funzione che al click del pulsante mi recupera i numeri che l' utente ha inserito e controlla quali sono presenti nell' array di quelli generati random
+const confirm = (e) => {
+  
+  // definisco l' array che mi contiene i numeri inseriti dall' utente
+  const userNumbers = [];
+
+  //definisco un nuovo array, in cui vado ad inserire solo i numeri che l' utente ha indovinato
+  const correctAnswers = [];
+
+  // ciclo inputs per recuperare i valori inseriti dall' utente e metterli nell' array userNumbers
+  for(let i=0; i<inputs.length; i++){
+    userNumbers.push(parseInt(inputs[i].value));
+  }
+
+  // ciclo l' array userNumbers e confronto l' elemento attualmente ciclato con quelli presenti nell' array dei generati casualmente
+  for(let i=0; i<userNumbers.length; i++){
+    if(numbers.includes(userNumbers[i])){
+      correctAnswers.push(userNumbers[i]);
+    }
+  }
+  //mostro il messaggio all' utente
+  message.classList.remove(`text-danger`);
+  message.innerText = `Hai indovinato ${correctAnswers.length} (${correctAnswers})`;
+  
+}
+
+//dimostro il risultato
+button.addEventListener(`click`, (e) =>{
+  e.preventDefault();
+  confirm();
+})
