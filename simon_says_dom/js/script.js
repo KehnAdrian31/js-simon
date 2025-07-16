@@ -72,7 +72,19 @@ const confirm = (e) => {
 
   // ciclo inputs per recuperare i valori inseriti dall' utente e metterli nell' array userNumbers
   for(let i=0; i<inputs.length; i++){
-    userNumbers.push(parseInt(inputs[i].value));
+    //bonus
+    const value = parseInt(inputs[i].value);
+    //verifico se l' utente ha inserito un numero  che sia compreso tra i valori min e max impostati nella funzione
+    if(isNaN(value) === false && value >= 1 && value <= 30 && userNumbers.includes(value) === false){
+      //inserisco il valore in numero all' interno dell' array userNumbers
+      userNumbers.push(value);
+    }
+    
+  }
+
+  if(userNumbers.length !== 5){
+    message.innerText = `ci sono valori non validi o duplicati`;
+    return;
   }
 
   // ciclo l' array userNumbers e confronto l' elemento attualmente ciclato con quelli presenti nell' array dei generati casualmente
@@ -83,6 +95,7 @@ const confirm = (e) => {
   }
   //mostro il messaggio all' utente
   message.classList.remove(`text-danger`);
+  message.classList.add(`text-success`);
   message.innerText = `Hai indovinato ${correctAnswers.length} (${correctAnswers})`;
   
 }
