@@ -28,4 +28,9 @@ const generateRandomNumbers = (min, max) => {
 
 //genero i numeri random
 const numbers = generateRandomNumbers(1,10);
-console.log(numbers)
+
+//devo mostrare i numeri a video
+//ciclo l' array numbers
+for(let i=0; i<numbers.length; i++){
+  numbersList.innerHTML += `<li class="list-item">${numbers[i]}</li>`;
+}
